@@ -1,4 +1,7 @@
 import Button from "components/Button";
+import { appActions } from "contexts/Actions";
+import { useAppContext } from "contexts/AppContext";
+import { format } from "date-fns";
 import Refresh from "icons/Refresh";
 import Sun from "icons/Sun";
 import { useEffect, useState } from "react";
@@ -12,6 +15,14 @@ const Clock = ({
   toggleShowDetails(): void;
 }) => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
+  const { clock, geo, greeting, dispatch } = useAppContext();
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      dispatch(appActions.timeGo());
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [dispatch]);
 
   useEffect(() => {
     const mobile = () => {
@@ -49,14 +60,18 @@ const Clock = ({
           <S.Left>
             <h4>
               <Sun />
-              GOOD MORNING{!isMobile && ", IT’S CURRENTLY"}
+              {greeting}
+              {!isMobile && ", IT’S CURRENTLY"}
             </h4>
             <div>
               <h1>
-                11:37<span className="abbr">BST</span>
+                {format(clock.datetime, "HH:mm")}
+                <span className="abbr"> {clock.abbreviation}</span>
               </h1>
             </div>
-            <h3>IN LONDON, UK</h3>
+            <h3>
+              IN {geo.regionName}, {geo.country}
+            </h3>
           </S.Left>
           <S.Right>
             <Button showDetails={showDetails} onClick={toggleShowDetails} />

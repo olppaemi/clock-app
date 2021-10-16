@@ -95,6 +95,7 @@ export const Left = styled.div`
   h4 {
     display: flex;
     align-items: center;
+    text-transform: uppercase;
 
     svg {
       margin-right: ${rem(16)};

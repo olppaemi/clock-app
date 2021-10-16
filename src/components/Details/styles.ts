@@ -44,7 +44,7 @@ export const Left = styled.div`
 
   @media (max-width: ${media.lg}) {
     border-right: none;
-    justify-content: space-around;
+    /* justify-content: space-around; */
   }
 `;
 
