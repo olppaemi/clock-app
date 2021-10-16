@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import media from "styles/media";
 import { rem } from "styles/utils";
 
 export const Button = styled.button<{ $rotate: boolean }>`
@@ -25,5 +26,24 @@ export const Button = styled.button<{ $rotate: boolean }>`
     justify-self: flex-end;
     transform: ${({ $rotate }) => $rotate && "rotate(180deg)"};
     transition: all 300ms ease-in;
+
+    &:hover {
+      circle {
+        fill: #999999;
+      }
+    }
+  }
+
+  @media (max-width: ${media.sm}) {
+    width: ${rem(115)};
+    height: ${rem(39)};
+    font-size: ${rem(12)};
+    letter-spacing: ${rem(3.75)};
+    padding-left: ${rem(17)};
+    padding-right: ${rem(4)};
+
+    svg {
+      transform: scale(0.8) ${({ $rotate }) => $rotate && "rotate(180deg)"};
+    }
   }
 `;

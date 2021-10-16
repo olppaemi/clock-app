@@ -11,9 +11,16 @@ const Home = () => {
   };
 
   return (
-    <S.Page>
+    <S.Page $isDayTime={true}>
       <Clock showDetails={showDetails} toggleShowDetails={toggleShowDetails} />
-      {showDetails && <Details />}
+      {showDetails && (
+        <Details
+          timezone="Europe/London"
+          dayOfWeek={5}
+          dayOfYear={295}
+          weekNumber={42}
+        />
+      )}
     </S.Page>
   );
 };
