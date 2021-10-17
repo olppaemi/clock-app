@@ -20,7 +20,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    getData("http://worldtimeapi.org/api/ip")
+    getData("https://worldtimeapi.org/api/ip")
       .then((resp: ResponseTime) => {
         const {
           client_ip,
