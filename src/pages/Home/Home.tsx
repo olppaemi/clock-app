@@ -78,8 +78,13 @@ const Home = () => {
 
   return (
     <S.Page $isDayTime={isDayTime(clock.datetime)}>
-      <Clock showDetails={showDetails} toggleShowDetails={toggleShowDetails} />
-      {showDetails && <Details />}
+      <main>
+        <Clock
+          showDetails={showDetails}
+          toggleShowDetails={toggleShowDetails}
+        />
+        {showDetails && <Details />}
+      </main>
     </S.Page>
   );
 };
