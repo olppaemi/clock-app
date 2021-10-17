@@ -6,7 +6,6 @@ import { Action } from "./Actions";
 export type AppState = {
   clock: ClockType;
   geo: GeoType;
-  greeting: string;
 };
 
 export const reducer = (draft: AppState, action: Action): AppState | void => {
@@ -17,10 +16,6 @@ export const reducer = (draft: AppState, action: Action): AppState | void => {
     }
     case "SET_GEO": {
       draft.geo = action.payload.geo;
-      break;
-    }
-    case "SET_GREETING": {
-      draft.greeting = action.payload.greeting;
       break;
     }
     case "TIME_GO": {

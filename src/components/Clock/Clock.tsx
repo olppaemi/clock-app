@@ -1,10 +1,12 @@
 import Button from "components/Button";
+import Quote from "components/Quote";
 import { appActions } from "contexts/Actions";
 import { useAppContext } from "contexts/AppContext";
 import { format } from "date-fns";
-import Refresh from "icons/Refresh";
+import Moon from "icons/Moon";
 import Sun from "icons/Sun";
 import { useEffect, useState } from "react";
+import { getGreeting, isDayTime } from "utils/time-utils";
 import * as S from "./styles";
 
 const Clock = ({
@@ -15,7 +17,7 @@ const Clock = ({
   toggleShowDetails(): void;
 }) => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
-  const { clock, geo, greeting, dispatch } = useAppContext();
+  const { clock, geo, dispatch } = useAppContext();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -37,30 +39,14 @@ const Clock = ({
   }, []);
 
   return (
-    <S.Clock $showDetails={showDetails} $isDayTime={true}>
+    <S.Clock $showDetails={showDetails}>
       <S.Center $showDetails={showDetails}>
-        {!showDetails && (
-          <S.Quote>
-            <S.QuoteText>
-              <p>
-                “The science of operations, as derived from mathematics more
-                especially, is a science of itself, and has its own abstract
-                truth and value.”
-              </p>
-              <p>
-                <strong>Ada Lovelace</strong>
-              </p>
-            </S.QuoteText>
-            <S.RefreshIcon>
-              <Refresh />
-            </S.RefreshIcon>
-          </S.Quote>
-        )}
+        {!showDetails && <Quote />}
         <S.Time>
           <S.Left>
             <h4>
-              <Sun />
-              {greeting}
+              {isDayTime(clock.datetime) ? <Sun /> : <Moon />}
+              {getGreeting(clock.datetime)}
               {!isMobile && ", IT’S CURRENTLY"}
             </h4>
             <div>

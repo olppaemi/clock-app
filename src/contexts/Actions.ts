@@ -11,10 +11,6 @@ export type Action =
       payload: { geo: GeoType };
     }
   | {
-      type: "SET_GREETING";
-      payload: { greeting: string };
-    }
-  | {
       type: "TIME_GO";
     };
 
@@ -28,13 +24,8 @@ const setGeo = (geo: GeoType): Action => ({
   payload: { geo },
 });
 
-const setGreeting = (greeting: string): Action => ({
-  type: "SET_GREETING",
-  payload: { greeting },
-});
-
 const timeGo = (): Action => ({
   type: "TIME_GO",
 });
 
-export const appActions = { setClock, setGeo, setGreeting, timeGo };
+export const appActions = { setClock, setGeo, timeGo };

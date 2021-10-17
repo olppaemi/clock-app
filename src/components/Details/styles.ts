@@ -44,7 +44,16 @@ export const Left = styled.div`
 
   @media (max-width: ${media.lg}) {
     border-right: none;
-    /* justify-content: space-around; */
+    & > * + * {
+      margin-top: ${rem(48)};
+    }
+  }
+
+  @media (max-width: ${media.md}) {
+    & > * + * {
+      margin-top: 0;
+    }
+    justify-content: space-around;
   }
 `;
 

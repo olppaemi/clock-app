@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import { percent, rem } from "styles/utils";
 import media from "styles/media";
 
-export const Clock = styled.div<{ $showDetails: boolean; $isDayTime: boolean }>`
+export const Clock = styled.div<{ $showDetails: boolean }>`
   width: 100%;
   height: 100vh;
   color: ${({ theme }) => theme.colors.white};
@@ -53,29 +53,6 @@ export const Center = styled.div<{ $showDetails: boolean }>`
       $showDetails ? "initial" : `${percent(596, 667)}`};
     padding-top: 0;
   }
-`;
-
-export const Quote = styled.div`
-  width: calc(50% + ${rem(16)});
-  display: flex;
-
-  @media (max-width: ${media.lg}) {
-    width: 100%;
-  }
-`;
-
-export const QuoteText = styled.div`
-  & > * + * {
-    margin-top: ${rem(13)};
-  }
-  strong {
-    font-weight: bold;
-  }
-`;
-
-export const RefreshIcon = styled.div`
-  margin-left: ${rem(16)};
-  cursor: pointer;
 `;
 
 export const Time = styled.div`

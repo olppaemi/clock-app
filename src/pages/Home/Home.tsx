@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { format } from "date-fns";
-
 import Clock from "components/Clock";
 import Details from "components/Details";
 import { ResponseTime } from "types/time";
@@ -8,9 +6,10 @@ import { appActions } from "contexts/Actions";
 import { useAppContext } from "contexts/AppContext";
 import { getData } from "utils/api";
 import * as S from "./styles";
+import { isDayTime } from "utils/time-utils";
 
 const Home = () => {
-  const { dispatch } = useAppContext();
+  const { clock, dispatch } = useAppContext();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
   const [showDetails, setShowDetails] = useState(false);
@@ -38,22 +37,13 @@ const Home = () => {
         const clockData = {
           abbreviation,
           datetime,
-          dayOfWeek,
-          dayOfYear,
+          dayOfWeek: dayOfWeek + 1,
+          dayOfYear: dayOfYear + 1,
           timezone,
-          weekNumber,
+          weekNumber: weekNumber + 1,
         };
-        const currentHour = Number(format(datetime, "HH"));
-        let greeting = "";
-        if (currentHour >= 5 && currentHour < 12) {
-          greeting = "Good morning";
-        } else if (currentHour >= 12 && currentHour < 6) {
-          greeting = "Good afternoon";
-        } else {
-          greeting = "Good evening";
-        }
+
         dispatch(appActions.setClock(clockData));
-        dispatch(appActions.setGreeting(greeting));
       })
       .catch((error) => {
         console.log(error);
@@ -87,7 +77,7 @@ const Home = () => {
   }
 
   return (
-    <S.Page $isDayTime={true}>
+    <S.Page $isDayTime={isDayTime(clock.datetime)}>
       <Clock showDetails={showDetails} toggleShowDetails={toggleShowDetails} />
       {showDetails && <Details />}
     </S.Page>

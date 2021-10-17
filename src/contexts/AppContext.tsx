@@ -18,13 +18,11 @@ const initialAppState: AppState = {
     country: "",
     regionName: "",
   },
-  greeting: "",
 };
 
 export type AppContextProps = {
   clock: ClockType;
   geo: GeoType;
-  greeting: string;
   dispatch: Dispatch<Action>;
 };
 
@@ -32,9 +30,9 @@ const AppContext = createContext<AppContextProps>({} as AppContextProps);
 
 export const AppContextProvider: FC = ({ children }) => {
   const [state, dispatch] = useImmerReducer(reducer, initialAppState);
-  const { clock, geo, greeting } = state;
+  const { clock, geo } = state;
   return (
-    <AppContext.Provider value={{ clock, geo, greeting, dispatch }}>
+    <AppContext.Provider value={{ clock, geo, dispatch }}>
       {children}
     </AppContext.Provider>
   );
